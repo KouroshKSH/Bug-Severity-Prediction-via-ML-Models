@@ -1,6 +1,5 @@
-# Bug-Severity-Prediction-via-ML-Models
-This project focused on developing machine learning (ML) models to predict the severity of software bugs based on their descriptions. The task involved training classifiers to assign severity labels to bug reports, with performance evaluated based on macro precision.
 # Bug Severity Prediction Project Report
+In this project, the classifier has to predict a severity label given a bug’s summary. The `summary` and `severity` columns are assigned to every unique bug (given their `bug_id`). The models were evaluated based on Macro Precision, as stated in the rules of the Kaggle competition. Finally, the model with the best performance was chosen as our final submission. 
 
 ## Team Members
 - Ozan Parlayan
@@ -8,9 +7,7 @@ This project focused on developing machine learning (ML) models to predict the s
 - Arya Hassibi 
 - Kutluhan Aygüzel
 
-# Introduction
-
-In this project, the classifier has to predict a severity label given a bug’s summary. The `summary` and `severity` columns are assigned to every unique bug (given their `bug_id`). The models were evaluated based on Macro Precision, as stated in the rules of the Kaggle competition. Finally, the model with the best performance was chosen as our final submission. 
+---
 
 # Problem Description 
 Initially, we are given a dataset that contains 3 columns: 
@@ -182,7 +179,7 @@ The XGBoost approach and BERT also hold promise for bug severity prediction if d
 
 
 # Appendix 
-## Team Members 
+## Team Members and Responsibilities
 
 1. Ozan Parlayan was responsible for the logistic regression and SVM implementations, which were our 2 best models. 
 2. Kourosh Sharifi was responsible for the EDA, model implementation of XGBoost, LightGBM, Random Forest and BERT, and writing the final report for this project.
