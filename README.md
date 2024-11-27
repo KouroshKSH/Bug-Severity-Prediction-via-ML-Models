@@ -2,10 +2,10 @@
 In this project, the classifier has to predict a severity label given a bug’s summary. The `summary` and `severity` columns are assigned to every unique bug (given their `bug_id`). The models were evaluated based on Macro Precision, as stated in the rules of the Kaggle competition. Finally, the model with the best performance was chosen as our final submission. 
 
 ## Team Members
-- Ozan Parlayan
-- Kourosh Sharifi
-- Arya Hassibi 
-- Kutluhan Aygüzel
+- **Arya Hassibi** on [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/aryahassibi) and [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/aryahassibi)
+- **Kourosh Sharifi** [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/kouroshsharifi) and [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/KouroshKSH)
+- **Ozan Parlayan** on [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/ozanparlayan) 
+- **Kutluhan Aygüzel** on [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/kutluhanayguzel) and [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/kutluhaan)
 
 ---
 
@@ -18,8 +18,15 @@ Initially, we are given a dataset that contains 3 columns:
 
 Then, after training an ML model on this training dataset, we are expected to classify the bugs of the test dataset. In the end, we store the `bug_id` and the `severity` label in a CSV file as the final submission to Kaggle, where it will be evaluated and scored. 
 
-> image here of dataset
-![][image1]A screenshot of the first 5 items of the training dataset 
+| Bug ID  | Summary                                                                          | Severity |
+|---------|----------------------------------------------------------------------------------|----------|
+| 365569  | Remove workaround from bug 297227                                                | normal   |
+| 365578  | Print Preview crashes on any URL in gtk2 builds                                  | critical |
+| 365582  | Lines are not showing in table                                                  | major    |
+| 365584  | "Firefox render “simplified Arabic” font face incorrectly when using (align=""justify"")" | normal   |
+| 365597  | Crash [@ nsINodeInfo::NodeInfoManager]                                            | critical |
+
+> The first couple of rows from the training dataset, which can be found [here](https://github.com/KouroshKSH/Bug-Severity-Prediction-via-ML-Models/blob/master/data/bugs-train.csv).
 
 In regards to how we predict the severity of a given bug, we can use different ML models to accomplish this task. Every approach uses different techniques of data preprocessing, transformation, hyperparameter tuning, training and testing. More on this in the following pages. 
 
@@ -31,18 +38,21 @@ In regards to how we predict the severity of a given bug, we can use different M
 
 ### Class Distribution 
 
-The tables below showcase the distribution of the bugs given their severity label. The table on the left uses a log scale for better representation. The pie chart below also showcases the percentage of each class. 
+The images below showcase the distribution of the bugs given their severity label. The table on the left uses a log scale for better representation. The pie chart below also showcases the percentage of each class. 
 
-> 3 images here
-![][image2]![][image3]![][image4]
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://github.com/KouroshKSH/Bug-Severity-Prediction-via-ML-Models/blob/master/img/class_distribution.png" alt="Image 1" style="width: 48%;"/>
+  <img src="https://github.com/KouroshKSH/Bug-Severity-Prediction-via-ML-Models/blob/master/img/log_scale_distribution.png" alt="Image 2" style="width: 46%;"/>
+</div>
+
+![](https://github.com/KouroshKSH/Bug-Severity-Prediction-via-ML-Models/blob/master/img/distribution_pie_chart.png)
 
 
 ### Severity vs. Bug ID 
 
 Although not helpful, we also plotted the graph for severity classes and their corresponding bug IDs. We aimed to extract as much information as possible out of the dataset, and perhaps, to exploit any unintended bugs with the dataset. 
 
-> image here
-![][image5]3  
+![](https://github.com/KouroshKSH/Bug-Severity-Prediction-via-ML-Models/blob/master/img/severity_vs_bugID.png)
 
 ---
 
@@ -78,8 +88,7 @@ We used TF-IDF vectorization to convert the textual data into numerical features
 
 The dataset was split into training and validation sets. We trained the logistic regression model on the training data and evaluated its performance on the validation set using macro precision as the evaluation metric. Additionally, we generated a classification report to assess the model's performance across different severity levels. 
 
-> image here
-![][image6]
+![](https://github.com/KouroshKSH/Bug-Severity-Prediction-via-ML-Models/blob/master/img/project_pipeline_LR.jpg)
 
 ### Model Testing 
 
@@ -87,14 +96,17 @@ Finally, we deployed the trained logistic regression model to predict the severi
 
 ### Plots 
 
-> 3 images here
-![][image7]  
-ROC curves for individual classes 
+![](https://github.com/KouroshKSH/Bug-Severity-Prediction-via-ML-Models/blob/master/img/ROC_curves.png)
 
-![][image8]6  
-Precision-Recall Curves for Individual Classes 
+> ROC curves for individual classes 
 
-![][image9]Confusion Matrix of the logistic regression model 
+![](https://github.com/KouroshKSH/Bug-Severity-Prediction-via-ML-Models/blob/master/img/precision_recall_curves.png)
+
+> Precision-Recall Curves for Individual Classes 
+
+![](https://github.com/KouroshKSH/Bug-Severity-Prediction-via-ML-Models/blob/master/img/confusion_matrix.png)
+
+> Confusion Matrix of the logistic regression model 
 
 ## BERT 
 
@@ -160,11 +172,6 @@ For Word2Vec, Doc2Vec and FastText, the vector size was set to **250**.
 
 The model was trained on the whole dataset using the combined feature vectors obtained from TF-IDF, Word2Vec, Doc2Vec, and FastText representations. With GPU acceleration enabled, this model took about 40-50 minutes per run to complete. 
 
-The exact hyperparameters that we used (after some fine-tuning): 
-
-> image here
-![][image11]
-
 ---
 
 # Results and Discussion 
@@ -185,14 +192,3 @@ The XGBoost approach and BERT also hold promise for bug severity prediction if d
 2. Kourosh Sharifi was responsible for the EDA, model implementation of XGBoost, LightGBM, Random Forest and BERT, and writing the final report for this project.
 3. Kutluhan Aygüzel was responsible for research, data preprocessing, and writing the final report.
 4. Arya Hassibi was responsible for BERT and ensemble models. 
-
-## Figures 
-
-> images needed
-![][image12]  
-Figure 1: Feature importance graph of the XGBoost model   
-![][image13]  
-Figure 2: The confusion matrix of the XGBoost model 
-![][image14]  
-Figure 3: The confusion matrix of the Random Forest model after Bayesian Optimization 21  
-![][image15]Figure 4: The poor results of the Random Forest model 
